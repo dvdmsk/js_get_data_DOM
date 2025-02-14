@@ -6,7 +6,7 @@ const population = [...document.querySelectorAll('.population')].map(
 );
 
 const sum = population.reduce((acc, val) => {
-  const number = val.split(',').join('');
+  const number = val.trim().split(',').join('');
 
   if (!isNaN(Number(number))) {
     return acc + Number(number);
@@ -15,23 +15,23 @@ const sum = population.reduce((acc, val) => {
   return acc;
 }, 0);
 
-const average = Math.round((sum / population.length) * 100) / 100;
-const sumFormatted = formatNumber(sum);
-const averageFormatted = formatNumber(average);
+// const average = Math.round((sum / population.length) * 100) / 100;
+const average = sum / population.length;
+const sumFormatted = sum.toLocaleString('en-US');
+const averageFormatted = average.toLocaleString('en-US');
 
-function formatNumber(number) {
-  let numNotFormatted = number;
-  let formatted = '';
+// function formatNumber(number) {
+//   let numNotFormatted = number;
+//   let formatted = '';
 
-  while (numNotFormatted % 1000 !== numNotFormatted) {
-    formatted =
-      `,${Math.round((numNotFormatted % 1000) * 100) / 100}` + formatted;
-    numNotFormatted = Math.floor(numNotFormatted / 1000);
-  }
-  formatted = numNotFormatted + formatted;
+//   while (numNotFormatted % 1000 !== numNotFormatted) {
+//     formatted = `,${numNotFormatted % 1000}` + formatted;
+//     numNotFormatted = Math.floor(numNotFormatted / 1000);
+//   }
+//   formatted = numNotFormatted + formatted;
 
-  return formatted;
-}
+//   return formatted;
+// }
 
 const totalPop = document.querySelector('.total-population');
 const averagePop = document.querySelector('.average-population');
